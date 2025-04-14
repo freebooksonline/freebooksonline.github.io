@@ -1,0 +1,526 @@
+/* --- IMPRESSIVE & COMPLEX CSS --- */
+
+/* 1. Root Variables & Font Imports --- */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    /* Color Palette */
+    --color-background: #f0f2f5; /* Lighter, cooler grey */
+    --color-surface: #ffffff; /* Pure white for content cards */
+    --color-text-primary: #2c3e50; /* Dark, slightly desaturated blue */
+    --color-text-secondary: #596a7a;
+    --color-accent-primary: #3498db; /* Vibrant blue */
+    --color-accent-secondary: #2980b9; /* Darker blue */
+    --color-border: #e1e8ed;
+    --color-shadow: rgba(44, 62, 80, 0.15); /* Shadow based on primary text color */
+
+    /* Typography */
+    --font-serif: 'Merriweather', serif;
+    --font-sans: 'Poppins', sans-serif;
+    --font-size-base: 16px; /* Controls overall scaling with rem units */
+    --line-height-base: 1.7;
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2.5rem;
+    --spacing-xxl: 4rem;
+
+    /* Effects */
+    --border-radius: 6px;
+    --transition-speed: 0.3s;
+    --shadow-depth-1: 0 2px 5px var(--color-shadow);
+    --shadow-depth-2: 0 5px 15px var(--color-shadow);
+    --shadow-depth-3: 0 10px 30px var(--color-shadow);
+}
+
+/* 2. Global Styles & Resets --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: var(--font-size-base);
+    scroll-behavior: smooth; /* Smooth scrolling for anchor links (if any) */
+    -webkit-text-size-adjust: 100%; /* Prevent font scaling on orientation change */
+}
+
+body {
+    font-family: var(--font-serif);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    background-image: linear-gradient(135deg, var(--color-background) 0%, #e6e9ed 100%); /* Subtle gradient */
+    -webkit-font-smoothing: antialiased; /* Better font rendering */
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 3. Layout Structure (Header, Main, Footer) --- */
+body > header, /* Direct children only */
+main,
+body > footer {
+    max-width: 850px; /* Slightly wider */
+    margin: var(--spacing-xl) auto;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-depth-2);
+    border: 1px solid var(--color-border);
+    position: relative; /* For potential pseudo-element decorations */
+    overflow: hidden; /* Contain pseudo-elements */
+}
+
+/* Add a subtle decorative top border */
+body > header::before,
+main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-image: linear-gradient(90deg, var(--color-accent-primary), var(--color-accent-secondary));
+    opacity: 0.8;
+}
+
+/* 4. Header Specific Styling --- */
+body > header {
+    text-align: center;
+    padding-top: var(--spacing-xl);
+    padding-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-depth-3); /* More prominent shadow */
+    margin-bottom: var(--spacing-xxl); /* More space below header */
+}
+
+body > header h1 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 2.8rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+    letter-spacing: -1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+body > header p {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    max-width: 600px; /* Prevent description being too wide */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 5. Main Content & Headings --- */
+main h2 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: var(--color-accent-secondary);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--color-accent-primary);
+    display: inline-block; /* Make border only as wide as text */
+}
+
+main h3 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text-primary);
+}
+
+main h3 a { /* Link styling within h3 */
+    text-decoration: none;
+    color: inherit;
+    transition: color var(--transition-speed) ease;
+}
+main h3 a:hover {
+    color: var(--color-accent-primary);
+}
+
+/* 6. Link Styling (General & Specific) --- */
+a {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    position: relative; /* For animated underline */
+    transition: color var(--transition-speed) ease;
+}
+
+a::after { /* Animated underline effect */
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -3px;
+    left: 0;
+    background-color: var(--color-accent-primary);
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all var(--transition-speed) ease-in-out;
+}
+
+a:hover {
+    color: var(--color-accent-secondary);
+}
+
+a:hover::after {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+/* Remove underline effect from elements where it's not desired */
+h1 a::after, h2 a::after, h3 a::after, .chapter-nav a::after, .book-list li > a::after /* Add more if needed */ {
+    display: none;
+}
+
+/* 7. Lists (Book List & TOC) --- */
+.book-list,
+.toc {
+    list-style: none; /* Remove default bullets */
+    padding: 0;
+    counter-reset: list-counter; /* Initialize counter */
+}
+
+.book-list li,
+.toc li {
+    position: relative;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md);
+    padding-left: calc(var(--spacing-xl) + var(--spacing-md)); /* Space for counter */
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    transition: all var(--transition-speed) ease;
+    background-color: #fdfdfd; /* Slightly off-white */
+}
+
+.book-list li:hover,
+.toc li:hover {
+    border-color: var(--color-accent-primary);
+    box-shadow: var(--shadow-depth-1);
+    transform: translateY(-3px);
+}
+
+/* Counter styling */
+.book-list li::before,
+.toc li::before {
+    counter-increment: list-counter;
+    content: counter(list-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0; /* Stretch height */
+    width: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-accent-primary);
+    color: var(--color-surface);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1rem;
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+    transition: background-color var(--transition-speed) ease;
+}
+
+.book-list li:hover::before,
+.toc li:hover::before {
+    background-color: var(--color-accent-secondary);
+}
+
+.book-list li p { /* Description style */
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-sm);
+}
+
+.toc a { /* TOC link styling */
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 1.1rem;
+    display: block; /* Make entire area clickable */
+}
+
+/* 8. Chapter Content Styling --- */
+.chapter-content {
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-lg) 0; /* Add vertical padding */
+    border-top: 1px solid var(--color-border);
+}
+
+/* Apply serif font and slightly larger size for reading */
+.chapter-content p {
+    font-family: var(--font-serif);
+    font-size: 1.1rem; /* Slightly larger for readability */
+    line-height: 1.8; /* More spacing */
+    margin-bottom: var(--spacing-md);
+    text-indent: 2em; /* Keep indentation */
+    hyphens: auto; /* Enable hyphenation for better flow (needs lang="en" in HTML) */
+    text-rendering: optimizeLegibility; /* Browser hint for better rendering */
+    color: var(--color-text-primary);
+}
+
+/* Style first paragraph differently (optional) */
+.chapter-content p:first-of-type {
+    text-indent: 0; /* No indent */
+    font-size: 1.2rem; /* Slightly larger first paragraph */
+    /* font-style: italic; */ /* Optional italic */
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Add drop cap to first letter (optional complexity) */
+/*
+.chapter-content p:first-of-type::first-letter {
+    float: left;
+    font-size: 4em;
+    line-height: 0.8;
+    padding-right: 0.1em;
+    margin-right: 0.05em;
+    font-weight: bold;
+    color: var(--color-accent-primary);
+    font-family: var(--font-sans);
+}
+*/
+
+/* 9. Chapter Navigation --- */
+.chapter-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 2px dashed var(--color-border);
+}
+
+.chapter-nav a {
+    display: inline-flex; /* Use flex for icon alignment */
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    color: var(--color-surface);
+    background-color: var(--color-accent-primary);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-depth-1);
+    transition: all var(--transition-speed) ease;
+    letter-spacing: 0.5px;
+}
+
+.chapter-nav a:hover {
+    background-color: var(--color-accent-secondary);
+    box-shadow: var(--shadow-depth-2);
+    transform: translateY(-2px);
+    color: var(--color-surface); /* Ensure text remains white */
+}
+
+.chapter-nav a:active {
+    transform: translateY(0);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Add arrow icons using pseudo-elements */
+.chapter-nav a[href*="previous"], /* Select link containing 'previous' */
+.chapter-nav a:first-child:not(:last-child) /* Or the first link if there are two */ {
+    padding-left: var(--spacing-md); /* Make space */
+}
+.chapter-nav a[href*="previous"]::before,
+.chapter-nav a:first-child:not(:last-child)::before {
+    content: '«';
+    margin-right: var(--spacing-sm);
+    font-weight: bold;
+}
+
+.chapter-nav a[href*="next"], /* Select link containing 'next' */
+.chapter-nav a:last-child:not(:first-child) /* Or the last link if there are two */ {
+    padding-right: var(--spacing-md); /* Make space */
+}
+.chapter-nav a[href*="next"]::after,
+.chapter-nav a:last-child:not(:first-child)::after {
+    content: '»';
+    margin-left: var(--spacing-sm);
+    font-weight: bold;
+}
+
+.nav-placeholder { /* Placeholder for alignment */
+    display: inline-block;
+    width: 100px; /* Adjust width as needed based on button size */
+    visibility: hidden;
+}
+
+/* 10. Footer Specific Styling --- */
+body > footer {
+    text-align: center;
+    margin-top: var(--spacing-xxl);
+    padding: var(--spacing-lg);
+    background-color: #e6e9ed; /* Slightly different bg */
+    border-top: 3px solid var(--color-border);
+    box-shadow: none; /* Remove shadow */
+    border-radius: 0; /* Remove rounding */
+    max-width: 100%; /* Make footer full width */
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+body > footer p {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+/* 11. Scrollbar Styling (Non-standard, WebKit/Firefox) --- */
+/* For Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-accent-secondary);
+    border-radius: 20px;
+    border: 3px solid var(--color-background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-accent-primary);
+}
+
+/* For Firefox */
+/* Note: Firefox support is limited and requires newer versions */
+* {
+    scrollbar-width: thin; /* "auto" or "thin" */
+    scrollbar-color: var(--color-accent-secondary) var(--color-background); /* thumb track */
+}
+
+
+/* 12. Responsiveness --- */
+@media (max-width: 900px) {
+    body > header, main, body > footer {
+        margin-left: var(--spacing-md);
+        margin-right: var(--spacing-md);
+        padding-left: var(--spacing-lg);
+        padding-right: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 15px; /* Slightly reduce base font size */
+    }
+
+    body > header h1 {
+        font-size: 2.2rem;
+    }
+    body > header p {
+        font-size: 1rem;
+    }
+
+    main h2 {
+        font-size: 1.6rem;
+    }
+    main h3 {
+        font-size: 1.2rem;
+    }
+
+    .book-list li, .toc li {
+        padding: var(--spacing-sm);
+        padding-left: calc(var(--spacing-lg) + var(--spacing-sm)); /* Adjust padding */
+    }
+    .book-list li::before, .toc li::before {
+        width: var(--spacing-lg); /* Adjust counter width */
+    }
+
+    .chapter-nav {
+        flex-direction: column; /* Stack nav links */
+        align-items: stretch; /* Make buttons full width */
+        gap: var(--spacing-md); /* Add space between stacked buttons */
+    }
+    .chapter-nav a {
+        width: 100%;
+        text-align: center;
+        justify-content: center; /* Center text/icon */
+    }
+    .chapter-nav a[href*="previous"]::before,
+    .chapter-nav a:first-child:not(:last-child)::before {
+        margin-right: var(--spacing-xs); /* Reduce icon spacing */
+    }
+    .chapter-nav a[href*="next"]::after,
+    .chapter-nav a:last-child:not(:first-child)::after {
+         margin-left: var(--spacing-xs); /* Reduce icon spacing */
+    }
+    .nav-placeholder {
+        display: none; /* No need for placeholder when stacked */
+    }
+}
+
+/* 13. Subtle Animation (Optional) --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+main {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* --- 14. Search Box Styling --- */
+.search-container {
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.search-container label {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-right: var(--spacing-sm);
+    font-size: 0.95rem;
+}
+
+.search-container input[type="text"] {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    width: calc(100% - 120px); /* Adjust width as needed, considers label width */
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.search-container input[type="text"]:focus {
+    outline: none;
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); /* Focus ring */
+}
+
+/* Style for hidden items during search */
+.book-list li.hidden,
+.toc li.hidden {
+    display: none;
+}
+
+/* Adjust search input width on smaller screens */
+@media (max-width: 600px) {
+    .search-container label {
+        display: block; /* Stack label above input */
+        margin-bottom: var(--spacing-xs);
+    }
+    .search-container input[type="text"] {
+        width: 100%; /* Full width */
+    }
+}
